@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style/style.css" class="css" />
+    <title>Weather Land-page</title>
+    <script src="https://kit.fontawesome.com/af5476175e.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;600;700;800&family=Open+Sans&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Merriweather+Sans:wght@300;400;600;700;800&family=Open+Sans&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<!--Start of the content-->
+
+<body id="body">
+    <!--Main Container (Bootstrap) for input + buttons-->
+    <form id="user-input">
+        <div class="container row-margin">
+            <div class="row content justify-content-center row-margin">
+                <div class="col-5 user-input">
+                    <div class="input-group">
+                        <!--Enter City-->
+                        <input type="text" class="form-control" placeholder="Enter City" aria-label="Enter City" aria-describedby="basic-addon2" id="enter-city" />
+                        <!--Search side buttons (location)-->
+                        <div class="input-group-append">
+                            <button class="btn btn-lg btn-outline-light btn-search" type="button" id="search-input">
+                  <i class="fas fa-search-location location"></i>
+                </button>
+                        </div>
+                        <!--Main / actual location-->
+                        <div class="col-sm">
+                            <button class="btn btn-lg btn-outline-light actual-location" type="button" id="actual-location">
+                  <i class="fas fa-street-view local"></i>
+                </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!--City-->
+    <div class="container container-two">
+        <div class="row g-2 rotation-right move-city-up">
+            <div class="col-6"></div>
+            <div class="col-6 move-city-right">
+                <div class="text-center">
+                    <h1 class="tittle-city" id="show-city">MUMBAI</h1>
+                </div>
+                <!--Icon-->
+                <div class="col-9 text-center icon-weather">
+                    <i class="fas fa-cloud-rain icon-weather" id="icon-weather"></i>
+                </div>
+                <!--Weather Description-->
+                <div class="row g-2">
+                    <div class="col-3"></div>
+                    <div class="col-8 text-center rotate-text description-text" id="description-text">
+                        <h4 class="description text-center" id="description-weather">
+                            Partly Cloudy
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Right side-->
+    <div class="row g-2">
+        <div class="col-12">
+            <div class="container width-main-container move-content-up">
+                <div class="row g-3 changing-position-details">
+                    <!--Date-->
+                    <div class="col-2"></div>
+                    <div class="col-10">
+                        <div class="col-1"></div>
+                        <div class="col-4">
+                            <div class="text-center p-2 today-date">
+                                <h3 class="today-date" id="date">SUNDAY 9:00 PM</h3>
+                            </div>
+                        </div>
+                        <!--Temperature-->
+                        <div class="col-7"></div>
+                        <div class="col-1"></div>
+                        <div class="col-5">
+                            <div class="changing-position">
+                                <div class="p-6 text-center">
+                                    <h1 class="temperature-number" id="temperature-grade">
+                                        <span class="temperature-number" id="grade">33</span>&degC
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Temperature Details-->
+                        <div class="col-6"></div>
+                        <div class="col-2"></div>
+                        <div class="col-5">
+                            <div class="changing-position">
+                                <div class="text-center details-temp">
+                                    <p>
+                                        <i class="fas fa-tint detail-icon" id="humid-icon"></i
+                      ><span class="percentage" id="humidity"> 56% </span>
+                      <i class="fas fa-wind detail-icon" id="wind-icon"></i>
+                                        <span class="percentage" id="wind">16 km/h</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Buttons celsius and fahrenheit-->
+                        <div class="row g-2">
+                            <div class="col-5 text-center">
+                                <button class="btn btn-lg btn-outline-light celsius-fahrenheit" type="button" id="celcius">
+                    &degC
+                  </button>
+                                <button class="btn btn-lg btn-outline-light celsius-fahrenheit" type="button" id="fahrenheit">
+                    &degF
+                  </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Next 5 days-->
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <div class="container-fluid position-next-days" id="nextDayTemplate">
+                        <div class="row text-center g-2">
+                            <div class="col-4">
+                                <div class="p-3 text-center next-days-edit color-cloud">
+                                    <h5 class="card-title" id="one">MON</h5>
+                                    <i class="fas fa-cloud icon icon-days" id="iconNext"></i>
+                                    <p class="card-text" id="max">
+                                        <strong>31</strong>&deg 29&deg
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-3 text-center next-days-edit color-cloud">
+                                    <h5 class="card-title" id="one">TUE</h5>
+                                    <i class="fas fa-cloud icon icon-days" id="iconNext"></i>
+                                    <p class="card-text" id="max">
+                                        <strong>31</strong>&deg 29&deg
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-3 text-center next-days-edit color-cloud">
+                                    <h5 class="card-title" id="one">WED</h5>
+                                    <i class="fas fa-cloud icon icon-days" id="iconNext"></i>
+                                    <p class="card-text" id="max">
+                                        <strong>31</strong>&deg 29&deg
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-3 text-center next-days-edit color-rain">
+                                    <h5 class="card-title" id="one">THU</h5>
+                                    <i class="fas fa-cloud-showers-heavy icon icon-days" id="iconNext"></i>
+                                    <p class="card-text" id="max">
+                                        <strong>29</strong>&deg 27&deg
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-3 text-center next-days-edit color-clear">
+                                    <h5 class="card-title" id="one">FRI</h5>
+                                    <i class="fas fa-sun icon icon-days" id="iconNext"></i>
+                                    <p class="card-text" id="max">
+                                        <strong>31</strong>&deg 29&deg
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-3 text-center next-days-edit color-cloud">
+                                    <h5 class="card-title" id="one">SAT</h5>
+                                    <i class="fas fa-cloud icon icon-days" id="iconNext"></i>
+                                    <p class="card-text" id="max">
+                                        <strong>31</strong>&deg 29&deg
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Created by Mili 2021-->
+        <div class="container">
+            <div class="row">
+                <div class="col-9 container-creator">
+                    <p class="created-by">
+                        <a href="https://github.com/nitrohero/weather-app-page" target="_blank" class="created-by">Open-source code</a
+              >
+              by
+              <a
+                href="https://www.instagram.com/girrrrish/"
+                target="_blank"
+                class="created-by"
+              >
+                Girish</a
+              >
+              ☁ 2021
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Javascript Doc-->
+    <script src="js/app.jsx"></script>
+  </body>
+</html>
