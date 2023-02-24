@@ -1,4 +1,4 @@
-Watch it LIVE! 🎉 -> https://Weatherapp.tk/
+Watch it LIVE! 🎉 -> https://nitrohero.github.io/weather-app/
 
 What the project does? 🤔 --> Show the current temperature of any city in the world (with a current location button) ⛅
 
